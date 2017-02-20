@@ -19,14 +19,15 @@ if (!class_exists('Base_Wordpress_Presets')) {
     class Base_Wordpress_Presets
     {
         public function __construct() {
-            self::set_mail_from();
+            self::set_phpmailer_settings();
         }
         
-        public static  function set_mail_from() {
-            add_filter( 'wp_mail_from', function() {
-                return 'automatico@minc.gov.br';
+        public static function set_phpmailer_settings() {
+            add_action( 'phpmailer_init', function($phpmailer) {              
+                $phpmailer->addReplyTo = "automatico@minc.gov.br";
             });
         }
+        
     }
 }
 
